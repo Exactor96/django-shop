@@ -5,5 +5,5 @@ from . import views
 
 app_name = 'search'
 urlpatterns = [
-    path('',views.search_index,name='search')
+    path('',views.ESearchView.as_view(),name='index')
 ]

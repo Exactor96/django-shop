@@ -1,15 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search</title>
-</head>
-<body>
-<h1>search</h1>
-
-<form method="GET">
-<input type="text">
-<p><input type="submit" value="Search"></p>
+<form action="{% url 'search:index' %}"method="get">
+    <input id="search" name="q" type="text" placeholder="Поиск">
+    <button type="submit"></button>
 </form>
-</body>
-</html>
+
+<h1>Поиск</h1>
+    {% if products %}
+        {% for product in products %}
+            <article>
+                <a href="{{ product.get_absolute_url }}">
+                    <h2>{{ product.name }}</h2>
+                </a>
+                {{ product.desctription|safe }}
+                {{ product.price }}
+                <img src="{{ product.image.url }}" class="img-responsive">
+
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>Не найдено публикаций по вашему запросу<br>Попробуйте повторить запрос с другой формулировкой</p>
+    {% endif %}
